@@ -1,5 +1,6 @@
 package com.publicuhc.scatter.logic;
 
+import com.publicuhc.scatter.ScatterParameters;
 import com.publicuhc.scatter.exceptions.ScatterLocationException;
 import com.publicuhc.scatter.zones.DeadZone;
 import org.bukkit.Location;
@@ -15,7 +16,7 @@ public interface ScatterLogic {
      * @return list of locations
      * @throws com.publicuhc.scatter.exceptions.ScatterLocationException on being not able to get a valid location
      */
-    List<Location> getScatterLocations(int amount, List<DeadZone> deadZones) throws ScatterLocationException;
+    List<Location> getScatterLocations(int amount, List<DeadZone> deadZones, ScatterParameters parameters) throws ScatterLocationException;
 
     /**
      * @return the unique name of the scatter logic
