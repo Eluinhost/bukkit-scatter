@@ -1,13 +1,10 @@
 package com.publicuhc.scatter;
 
-import org.bukkit.Material;
-
-import java.util.List;
-
 public class ScatterParameters {
 
     private Double m_radius = null;
     private Double m_playerRadius = null;
+    private Integer m_maxAttempts = null;
 
     /**
      * @return the radius for the scatter
@@ -63,5 +60,31 @@ public class ScatterParameters {
         return this;
     }
 
+    /**
+     * @return the max attempts per location
+     * @throws java.lang.IllegalStateException if wasnt set, check if set with isMaxAttemptsSet
+     */
+    public int getMaxAttempts() {
+        if(m_maxAttempts == null) {
+            throw new IllegalStateException();
+        }
+        return m_maxAttempts;
+    }
 
+    /**
+     *
+     * @return whether the max attempts has been set or not
+     */
+    public boolean isMaxAttemptsSet() {
+        return m_maxAttempts != null;
+    }
+
+    /**
+     * @param attempts the max attempts per location
+     * @return this, for method chaining
+     */
+    public ScatterParameters setMaxAttempts(int attempts) {
+        m_maxAttempts = attempts;
+        return this;
+    }
 }
