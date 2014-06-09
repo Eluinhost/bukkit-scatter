@@ -1,8 +1,6 @@
 package com.publicuhc.scatter.logic;
 
-import com.publicuhc.scatter.ScatterParameters;
 import com.publicuhc.scatter.exceptions.NoSolidBlockException;
-import com.publicuhc.scatter.exceptions.ScatterConfigurationException;
 import com.publicuhc.scatter.exceptions.ScatterLocationException;
 import com.publicuhc.scatter.zones.DeadZone;
 import org.bukkit.Location;
@@ -107,9 +105,8 @@ public abstract class ScatterLogic {
      * @param deadZones the list of zones for which spawning should be disallowed
      * @return a valid location
      * @throws com.publicuhc.scatter.exceptions.ScatterLocationException on being not able to get a valid location
-     * @throws com.publicuhc.scatter.exceptions.ScatterConfigurationException if needed parameters in ScatterParameters are missing
      */
-    public abstract Location getScatterLocation(List<DeadZone> deadZones, ScatterParameters parameters) throws ScatterLocationException, ScatterConfigurationException;
+    public abstract Location getScatterLocation(List<DeadZone> deadZones) throws ScatterLocationException;
 
     /**
      * @return the unique name of the scatter logic

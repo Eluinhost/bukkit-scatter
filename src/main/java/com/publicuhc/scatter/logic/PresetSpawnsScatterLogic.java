@@ -1,7 +1,5 @@
 package com.publicuhc.scatter.logic;
 
-import com.publicuhc.scatter.ScatterParameters;
-import com.publicuhc.scatter.exceptions.ScatterConfigurationException;
 import com.publicuhc.scatter.exceptions.ScatterLocationException;
 import com.publicuhc.scatter.zones.DeadZone;
 import org.bukkit.Location;
@@ -20,7 +18,7 @@ public class PresetSpawnsScatterLogic extends ScatterLogic {
     }
 
     @Override
-    public Location getScatterLocation(List<DeadZone> deadZones, ScatterParameters parameters) throws ScatterLocationException, ScatterConfigurationException {
+    public Location getScatterLocation(List<DeadZone> deadZones) throws ScatterLocationException {
         List<Location> spawns = new ArrayList<Location>(m_spawns);
 
         while(spawns.size() > 0) {
