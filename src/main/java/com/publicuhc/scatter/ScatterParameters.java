@@ -1,6 +1,11 @@
 package com.publicuhc.scatter;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ScatterParameters {
 
@@ -8,6 +13,7 @@ public class ScatterParameters {
     private Double m_playerRadius = null;
     private Integer m_maxAttempts = null;
     private Location m_centre = null;
+    private List<Material> m_materials = new ArrayList<Material>();
 
     /**
      * @return the radius for the scatter
@@ -112,5 +118,21 @@ public class ScatterParameters {
      */
     public boolean isCentreSet() {
         return m_centre != null;
+    }
+
+    /**
+     * @param materials the materials to add
+     * @return this, for method chaining
+     */
+    public ScatterParameters addMaterials(Material... materials) {
+        m_materials.addAll(Arrays.asList(materials));
+        return this;
+    }
+
+    /**
+     * @return whether any materials have been set or not
+     */
+    public boolean hasMaterials() {
+        return m_materials.size() != 0;
     }
 }
