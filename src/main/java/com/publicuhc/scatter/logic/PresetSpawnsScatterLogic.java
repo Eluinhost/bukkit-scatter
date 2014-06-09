@@ -21,9 +21,6 @@ public class PresetSpawnsScatterLogic extends ScatterLogic {
 
     @Override
     public Location getScatterLocation(List<DeadZone> deadZones, ScatterParameters parameters) throws ScatterLocationException, ScatterConfigurationException {
-        if(!parameters.isMaxAttemptsSet()) {
-            throw new ScatterConfigurationException();
-        }
         List<Location> spawns = new ArrayList<Location>(m_spawns);
 
         while(spawns.size() > 0) {
