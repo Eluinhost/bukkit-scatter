@@ -135,4 +135,11 @@ public class ScatterParameters {
     public boolean hasMaterials() {
         return m_materials.size() != 0;
     }
+
+    /**
+     * @return all of the materials
+     */
+    public List<Material> getMaterials() {
+        return m_materials;
+    }
 }
