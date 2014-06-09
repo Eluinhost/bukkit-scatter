@@ -8,6 +8,7 @@ import com.publicuhc.scatter.zones.DeadZone;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
 
@@ -34,18 +35,18 @@ public class RandomCircleScatterLogic extends ScatterLogic {
             double randomAngle = getRandom().nextDouble() * MATH_TAU;
 
             //get a random radius for uniform circular distribution
-            double radius = scatterRadius * Math.sqrt(getRandom().nextDouble());
+            double radius = scatterRadius * StrictMath.sqrt(getRandom().nextDouble());
 
-            //Convert back to cartesian coords
-            double xcoord = getXFromRadians(radius, randomAngle) + centre.getBlockX();
-            double zcoord = getZFromRadians(radius, randomAngle) + centre.getBlockZ();
+            //Convert back to cartesian coords and the nearest .1
+            BigDecimal xcoord = getXFromRadians(radius, randomAngle);
+            BigDecimal zcoord = getZFromRadians(radius, randomAngle);
 
             //make a new location at world height at the coordinates
             Location scatterLocation = centre.clone();
             scatterLocation.setY(centre.getWorld().getMaxHeight());
 
             //add the offsets we generated
-            scatterLocation.add(xcoord, 0, zcoord);
+            scatterLocation.add(xcoord.doubleValue(), 0, zcoord.doubleValue());
 
             //set the the nearest centre of a block
             setToNearestCentre(scatterLocation);
