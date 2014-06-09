@@ -13,6 +13,9 @@ public abstract class ScatterLogic {
 
     private final Random m_random;
 
+    public static final double X_CENTRE = 0.5D;
+    public static final double Z_CENTRE = 0.5D;
+
     public ScatterLogic(Random random) {
         m_random = random;
     }
@@ -39,6 +42,15 @@ public abstract class ScatterLogic {
      */
     public static double getXFromRadians(double radius, double angle) {
         return radius * StrictMath.cos(angle);
+    }
+
+    /**
+     * Sets the X and Z values to the nearest centre of a block (0.5,0.5)
+     * @param location the location to set
+     */
+    public static void setToNearestCentre(Location location) {
+        location.setX(Math.floor(location.getX()) + X_CENTRE);
+        location.setZ(Math.floor(location.getZ()) + Z_CENTRE);
     }
 
     /**
