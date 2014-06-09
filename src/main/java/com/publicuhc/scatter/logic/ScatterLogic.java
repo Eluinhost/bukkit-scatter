@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
@@ -82,6 +83,20 @@ public abstract class ScatterLogic {
 
         //no non-air blocks were found all the way down
         throw new NoSolidBlockException();
+    }
+
+    /**
+     * @param location the location to check against
+     * @param deadZones all of the deadzones to check
+     * @return true if location is in deadzone, false otherwise
+     */
+    public static boolean isLocationWithinDeadZones(Location location, Collection<DeadZone> deadZones) {
+        for(DeadZone deadZone : deadZones) {
+            if(!deadZone.isLocationAllowed(location)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
