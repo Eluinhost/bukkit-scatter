@@ -22,6 +22,26 @@ public abstract class ScatterLogic {
     }
 
     /**
+     * Gets the Z distance from the radius and angle
+     * @param radius the radius
+     * @param angle the angle
+     * @return the Z distance
+     */
+    public static double getZFromRadians(double radius, double angle) {
+        return radius * StrictMath.sin(angle);
+    }
+
+    /**
+     * Gets the X distance from the radius and angle
+     * @param radius the radius
+     * @param angle the angle
+     * @return the X distance
+     */
+    public static double getXFromRadians(double radius, double angle) {
+        return radius * StrictMath.cos(angle);
+    }
+
+    /**
      * Get a list of valid scatter locations
      * @param deadZones the list of zones for which spawning should be disallowed
      * @return a valid location
