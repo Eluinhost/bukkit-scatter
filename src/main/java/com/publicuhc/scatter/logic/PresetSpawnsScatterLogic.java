@@ -10,11 +10,25 @@ import java.util.Random;
 
 public class PresetSpawnsScatterLogic extends ScatterLogic {
 
-    private final List<Location> m_spawns;
+    private List<Location> m_spawns;
 
     public PresetSpawnsScatterLogic(Random random, List<Location> spawns) {
         super(random);
         m_spawns = spawns;
+    }
+
+    public List<Location> getSpawnsList() {
+        return m_spawns;
+    }
+
+    public PresetSpawnsScatterLogic setSpawnsList(List<Location> spawnsList) {
+        m_spawns = spawnsList;
+        return this;
+    }
+
+    public PresetSpawnsScatterLogic addSpawn(Location spawn) {
+        m_spawns.add(spawn);
+        return this;
     }
 
     @Override

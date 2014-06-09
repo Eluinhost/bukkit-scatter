@@ -14,10 +14,10 @@ import java.util.Random;
 
 public class RandomSquareScatterLogic extends ScatterLogic {
 
-    private final int m_maxAttempts;
-    private final double m_radius;
-    private final Location m_centre;
-    private final List<Material>  m_materials = new ArrayList<Material>();
+    private int m_maxAttempts;
+    private double m_radius;
+    private Location m_centre;
+    private List<Material>  m_materials = new ArrayList<Material>();
 
     public RandomSquareScatterLogic(Random random, Location centre, int maxAttempts, double radius, Material... allowedMaterials) {
         super(random);
@@ -25,6 +25,47 @@ public class RandomSquareScatterLogic extends ScatterLogic {
         m_radius = radius;
         m_centre = centre;
         m_materials.addAll(Arrays.asList(allowedMaterials));
+    }
+
+    public int getMaxAttempts() {
+        return m_maxAttempts;
+    }
+
+    public RandomSquareScatterLogic setMaxAttempts(int attempts) {
+        m_maxAttempts = attempts;
+        return this;
+    }
+
+    public double getRadius() {
+        return m_radius;
+    }
+
+    public RandomSquareScatterLogic setRadius(double radius) {
+        m_radius = radius;
+        return this;
+    }
+
+    public Location getCentre() {
+        return m_centre;
+    }
+
+    public RandomSquareScatterLogic setCentre(Location centre) {
+        m_centre = centre;
+        return this;
+    }
+
+    public List<Material> getMaterials() {
+        return m_materials;
+    }
+
+    public RandomSquareScatterLogic setMaterials(List<Material> materials) {
+        m_materials = materials;
+        return this;
+    }
+
+    public RandomSquareScatterLogic addMaterials(Material... materials) {
+        m_materials.addAll(Arrays.asList(materials));
+        return this;
     }
 
     @Override

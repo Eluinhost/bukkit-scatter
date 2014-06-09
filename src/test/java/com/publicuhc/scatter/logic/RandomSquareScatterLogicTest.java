@@ -1,8 +1,6 @@
 package com.publicuhc.scatter.logic;
 
-import com.publicuhc.scatter.ScatterParameters;
 import com.publicuhc.scatter.exceptions.NoSolidBlockException;
-import com.publicuhc.scatter.exceptions.ScatterConfigurationException;
 import com.publicuhc.scatter.exceptions.ScatterLocationException;
 import com.publicuhc.scatter.zones.DeadZone;
 import org.bukkit.Location;
@@ -28,43 +26,23 @@ public class RandomSquareScatterLogicTest {
 
     private RandomSquareScatterLogic logic;
     private Random mockRandom;
-    private ScatterParameters parameters;
     private Location centre;
 
     @Before
     public void onStartup() throws NoSolidBlockException {
         mockRandom = mock(Random.class);
-        logic = spy(new RandomSquareScatterLogic(mockRandom));
         World world = mock(World.class);
         centre = new Location(world, 10, 0, -10);
+        logic = spy(new RandomSquareScatterLogic(mockRandom, centre, 1, 10));
         doNothing().when(logic).setToHighestNonAir(any(Location.class));
     }
 
-    @Test(expected = ScatterConfigurationException.class)
-    public void testMaxAttemptsParameterNotSet() throws ScatterLocationException, ScatterConfigurationException {
-        ScatterParameters parameters = new ScatterParameters().setCentre(centre).setRadius(10);
-        logic.getScatterLocation(new ArrayList<DeadZone>(), parameters);
-    }
-
-    @Test(expected = ScatterConfigurationException.class)
-    public void testRadiusNotSet() throws ScatterLocationException, ScatterConfigurationException {
-        ScatterParameters parameters = new ScatterParameters().setMaxAttempts(100).setCentre(centre);
-        logic.getScatterLocation(new ArrayList<DeadZone>(), parameters);
-    }
-
-    @Test(expected = ScatterConfigurationException.class)
-    public void testCentreNotSet() throws ScatterLocationException, ScatterConfigurationException {
-        ScatterParameters parameters = new ScatterParameters().setMaxAttempts(100).setRadius(100);
-        logic.getScatterLocation(new ArrayList<DeadZone>(), parameters);
-    }
-
     @Test
-    public void testGetLocationsNoDeadZones() throws ScatterLocationException, ScatterConfigurationException {
+    public void testGetLocationsNoDeadZones() throws ScatterLocationException {
         //test half side length X and Z
         when(mockRandom.nextDouble()).thenReturn(0.5D);
-        ScatterParameters parameters = new ScatterParameters().setMaxAttempts(1).setRadius(10).setCentre(centre);
 
-        Location location = logic.getScatterLocation(new ArrayList<DeadZone>(), parameters);
+        Location location = logic.getScatterLocation(new ArrayList<DeadZone>());
 
         //10,0,-10 without the 0.5 offset
         Location expected = new Location(centre.getWorld(), 10.5, 0, -9.5);
@@ -73,7 +51,7 @@ public class RandomSquareScatterLogicTest {
         //test full side length X and Z
         when(mockRandom.nextDouble()).thenReturn(1.0D);
 
-        location = logic.getScatterLocation(new ArrayList<DeadZone>(), parameters);
+        location = logic.getScatterLocation(new ArrayList<DeadZone>());
 
         //20, 0, 0 without the offset
         expected = new Location(centre.getWorld(), 20.5, 0, .5);
@@ -82,7 +60,7 @@ public class RandomSquareScatterLogicTest {
         //test .8 length X and .4 length Z
         when(mockRandom.nextDouble()).thenReturn(0.8D).thenReturn(0.4D);
 
-        location = logic.getScatterLocation(new ArrayList<DeadZone>(), parameters);
+        location = logic.getScatterLocation(new ArrayList<DeadZone>());
 
         //16, 0, -12 without the offset
         expected = new Location(centre.getWorld(), 16.5, 0, -11.5);
@@ -91,7 +69,7 @@ public class RandomSquareScatterLogicTest {
         //test arbitary numbers
         when(mockRandom.nextDouble()).thenReturn(0.34784D).thenReturn(0.73847D);
 
-        location = logic.getScatterLocation(new ArrayList<DeadZone>(), parameters);
+        location = logic.getScatterLocation(new ArrayList<DeadZone>());
 
         //6.9568, 0, -5.2306 without offset
         expected = new Location(centre.getWorld(), 6.5, 0, -5.5);
@@ -99,16 +77,16 @@ public class RandomSquareScatterLogicTest {
     }
 
     @Test
-    public void testAllWithinDeadZones() throws ScatterConfigurationException {
-        ScatterParameters parameters = new ScatterParameters().setMaxAttempts(10).setRadius(10).setCentre(centre);
-
+    public void testAllWithinDeadZones()  {
         DeadZone zone = mock(DeadZone.class);
         when(zone.isLocationAllowed(any(Location.class))).thenReturn(false);
         List<DeadZone> zones = new ArrayList<DeadZone>();
         zones.add(zone);
 
+        logic.setMaxAttempts(10);
+
         try {
-            logic.getScatterLocation(zones, parameters);
+            logic.getScatterLocation(zones);
         } catch (ScatterLocationException e) {
             //this is what we expect
             verify(mockRandom, times(20)).nextDouble();

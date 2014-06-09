@@ -16,10 +16,10 @@ public class RandomCircleScatterLogic extends ScatterLogic {
 
     public static final double MATH_TAU = Math.PI * 2;
 
-    private final int m_maxAttempts;
-    private final double m_radius;
-    private final Location m_centre;
-    private final List<Material>  m_materials = new ArrayList<Material>();
+    private int m_maxAttempts;
+    private double m_radius;
+    private Location m_centre;
+    private List<Material>  m_materials = new ArrayList<Material>();
 
     public RandomCircleScatterLogic(Random random, Location centre, int maxAttempts, double radius, Material... allowedMaterials) {
         super(random);
@@ -29,23 +29,65 @@ public class RandomCircleScatterLogic extends ScatterLogic {
         m_materials.addAll(Arrays.asList(allowedMaterials));
     }
 
+    public int getMaxAttempts() {
+        return m_maxAttempts;
+    }
+
+    public RandomCircleScatterLogic setMaxAttempts(int attempts) {
+        m_maxAttempts = attempts;
+        return this;
+    }
+
+    public double getRadius() {
+        return m_radius;
+    }
+
+    public RandomCircleScatterLogic setRadius(double radius) {
+        m_radius = radius;
+        return this;
+    }
+
+    public Location getCentre() {
+        return m_centre;
+    }
+
+    public RandomCircleScatterLogic setCentre(Location centre) {
+        m_centre = centre;
+        return this;
+    }
+
+    public List<Material> getMaterials() {
+        return m_materials;
+    }
+
+    public RandomCircleScatterLogic setMaterials(List<Material> materials) {
+        m_materials = materials;
+        return this;
+    }
+
+    public RandomCircleScatterLogic addMaterials(Material... materials) {
+        m_materials.addAll(Arrays.asList(materials));
+        return this;
+    }
+
+
     @Override
     public Location getScatterLocation(List<DeadZone> deadZones) throws ScatterLocationException {
-        for (int i = 0; i < m_maxAttempts; i++) {
+        for (int i = 0; i < getMaxAttempts(); i++) {
 
             //get a random angle between 0 and TAU
             double randomAngle = getRandom().nextDouble() * MATH_TAU;
 
             //get a random radius for uniform circular distribution
-            double radius = m_radius * StrictMath.sqrt(getRandom().nextDouble());
+            double radius = getRadius() * StrictMath.sqrt(getRandom().nextDouble());
 
             //Convert back to cartesian coords and the nearest .1
             BigDecimal xcoord = getXFromRadians(radius, randomAngle);
             BigDecimal zcoord = getZFromRadians(radius, randomAngle);
 
             //make a new location at world height at the coordinates
-            Location scatterLocation = m_centre.clone();
-            scatterLocation.setY(m_centre.getWorld().getMaxHeight());
+            Location scatterLocation = getCentre().clone();
+            scatterLocation.setY(getCentre().getWorld().getMaxHeight());
 
             //add the offsets we generated
             scatterLocation.add(xcoord.doubleValue(), 0, zcoord.doubleValue());
@@ -61,10 +103,10 @@ public class RandomCircleScatterLogic extends ScatterLogic {
             }
 
             //if there are any mats set check that the block we have is a valid one
-            if(m_materials.size() > 0) {
+            if(getMaterials().size() > 0) {
                 Material mat = scatterLocation.getBlock().getType();
 
-                if(!m_materials.contains(mat)) {
+                if(!getMaterials().contains(mat)) {
                     continue;
                 }
             }
