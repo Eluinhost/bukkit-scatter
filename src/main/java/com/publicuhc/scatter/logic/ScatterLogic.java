@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
@@ -30,32 +31,34 @@ public abstract class ScatterLogic {
     }
 
     /**
-     * Gets the Z distance from the radius and angle
+     * Gets the Z distance from the radius and angle, accurate to 2 decimal places using rounding mode ROUND_HALF_UP
      * @param radius the radius
      * @param angle the angle
      * @return the Z distance
      */
-    public static double getZFromRadians(double radius, double angle) {
-        return radius * StrictMath.sin(angle);
+    public BigDecimal getZFromRadians(double radius, double angle) {
+        BigDecimal zLength = new BigDecimal(StrictMath.cos(angle)).multiply(new BigDecimal(radius));
+        return zLength.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
     /**
-     * Gets the X distance from the radius and angle
+     * Gets the X distance from the radius and angle, accurate to 2 decimal places using rounding mode ROUND_HALF_UP
      * @param radius the radius
      * @param angle the angle
      * @return the X distance
      */
-    public static double getXFromRadians(double radius, double angle) {
-        return radius * StrictMath.cos(angle);
+    public BigDecimal getXFromRadians(double radius, double angle) {
+        BigDecimal xLength = new BigDecimal(StrictMath.sin(angle)).multiply(new BigDecimal(radius));
+        return xLength.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
     /**
      * Sets the X and Z values to the nearest centre of a block (0.5,0.5)
      * @param location the location to set
      */
-    public static void setToNearestCentre(Location location) {
-        location.setX(Math.floor(location.getX()) + X_CENTRE);
-        location.setZ(Math.floor(location.getZ()) + Z_CENTRE);
+    public void setToNearestCentre(Location location) {
+        location.setX(StrictMath.floor(location.getX()) + X_CENTRE);
+        location.setZ(StrictMath.floor(location.getZ()) + Z_CENTRE);
     }
 
     /**
@@ -64,7 +67,7 @@ public abstract class ScatterLogic {
      * @param loc The location to use
      * @throws com.publicuhc.scatter.exceptions.NoSolidBlockException when there was no valid block found
      */
-    public static void setToHighestNonAir(Location loc) throws NoSolidBlockException {
+    public void setToHighestNonAir(Location loc) throws NoSolidBlockException {
         //Load the chunk first so the world is generated
         if (!loc.getChunk().isLoaded()) {
             loc.getChunk().load(true);
@@ -90,7 +93,7 @@ public abstract class ScatterLogic {
      * @param deadZones all of the deadzones to check
      * @return true if location is in deadzone, false otherwise
      */
-    public static boolean isLocationWithinDeadZones(Location location, Collection<DeadZone> deadZones) {
+    public boolean isLocationWithinDeadZones(Location location, Collection<DeadZone> deadZones) {
         for(DeadZone deadZone : deadZones) {
             if(!deadZone.isLocationAllowed(location)) {
                 return true;
