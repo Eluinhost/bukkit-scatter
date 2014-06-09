@@ -8,6 +8,7 @@ import com.publicuhc.scatter.zones.DeadZone;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
 
@@ -29,8 +30,8 @@ public class RandomSquareScatterLogic extends ScatterLogic {
         for (int i = 0; i < maxTries; i++) {
 
             //Get the random coords within the box
-            double xcoord = (getRandom().nextDouble() * scatterRadius * 2.0D) - scatterRadius;
-            double zcoord = (getRandom().nextDouble() * scatterRadius * 2.0D) - scatterRadius;
+            double xcoord = new BigDecimal((getRandom().nextDouble() * scatterRadius * 2.0D) - scatterRadius).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+            double zcoord = new BigDecimal((getRandom().nextDouble() * scatterRadius * 2.0D) - scatterRadius).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 
             //make a new location at world height at the coordinates
             Location scatterLocation = centre.clone();
