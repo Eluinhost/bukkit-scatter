@@ -1,10 +1,14 @@
 package com.publicuhc.scatter.logic;
 
 import com.publicuhc.scatter.ScatterParameters;
+import com.publicuhc.scatter.exceptions.NoSolidBlockException;
 import com.publicuhc.scatter.exceptions.ScatterConfigurationException;
 import com.publicuhc.scatter.exceptions.ScatterLocationException;
 import com.publicuhc.scatter.zones.DeadZone;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 
 import java.util.List;
 import java.util.Random;
@@ -51,6 +55,33 @@ public abstract class ScatterLogic {
     public static void setToNearestCentre(Location location) {
         location.setX(Math.floor(location.getX()) + X_CENTRE);
         location.setZ(Math.floor(location.getZ()) + Z_CENTRE);
+    }
+
+    /**
+     * Sets the Y coordinate to the highest non air block at a location, starting at it's Y and moving down
+     *
+     * @param loc The location to use
+     * @throws com.publicuhc.scatter.exceptions.NoSolidBlockException when there was no valid block found
+     */
+    public static void setToHighestNonAir(Location loc) throws NoSolidBlockException {
+        //Load the chunk first so the world is generated
+        if (!loc.getChunk().isLoaded()) {
+            loc.getChunk().load(true);
+        }
+
+        Block block = loc.getBlock();
+        while(block != null) {
+            //set the Y if we find a non-air block
+            if(block.getType() != Material.AIR) {
+                loc.setY(block.getY());
+                return;
+            }
+            //keep falling down
+            block = block.getRelative(BlockFace.DOWN);
+        }
+
+        //no non-air blocks were found all the way down
+        throw new NoSolidBlockException();
     }
 
     /**
