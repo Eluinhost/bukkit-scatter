@@ -7,8 +7,19 @@ import com.publicuhc.scatter.zones.DeadZone;
 import org.bukkit.Location;
 
 import java.util.List;
+import java.util.Random;
 
-public interface ScatterLogic {
+public abstract class ScatterLogic {
+
+    private final Random m_random;
+
+    public ScatterLogic(Random random) {
+        m_random = random;
+    }
+
+    public Random getRandom() {
+        return m_random;
+    }
 
     /**
      * Get a list of valid scatter locations
@@ -17,15 +28,15 @@ public interface ScatterLogic {
      * @throws com.publicuhc.scatter.exceptions.ScatterLocationException on being not able to get a valid location
      * @throws com.publicuhc.scatter.exceptions.ScatterConfigurationException if needed parameters in ScatterParameters are missing
      */
-    List<Location> getScatterLocation(List<DeadZone> deadZones, ScatterParameters parameters) throws ScatterLocationException, ScatterConfigurationException;
+    public abstract List<Location> getScatterLocation(List<DeadZone> deadZones, ScatterParameters parameters) throws ScatterLocationException, ScatterConfigurationException;
 
     /**
      * @return the unique name of the scatter logic
      */
-    String getID();
+    public abstract String getID();
 
     /**
      * @return a short description of how we scatter
      */
-    String getDescription();
+    public abstract String getDescription();
 }
