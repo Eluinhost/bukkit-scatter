@@ -4,9 +4,12 @@ import com.publicuhc.scatter.exceptions.ScatterLocationException;
 import com.publicuhc.scatter.logic.ScatterLogic;
 import com.publicuhc.scatter.zones.DeadZone;
 import com.publicuhc.scatter.zones.DeadZoneBuilder;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DefaultScatterer implements Scatterer{
@@ -54,6 +57,18 @@ public class DefaultScatterer implements Scatterer{
     }
 
     @Override
+    public void scatterPlayers(List<Player> players) throws ScatterLocationException {
+        int amount = players.size();
+
+        List<Location> locations = getScatterLocations(amount);
+        Collections.shuffle(locations);
+
+        for(int i = 0; i<amount; i++) {
+            players.get(i).teleport(locations.get(i));
+        }
+    }
+
+    @Override
     public void setLogic(ScatterLogic logic) {
         m_logic = logic;
     }
@@ -86,5 +101,27 @@ public class DefaultScatterer implements Scatterer{
     @Override
     public void addBaseDeadZone(DeadZone zone) {
         m_baseDeadZones.add(zone);
+    }
+
+    @Override
+    public void clearBaseDeadZones() {
+        m_baseDeadZones.clear();
+    }
+
+    @Override
+    public void addDeadZonesForPlayers(List<Player> players) {
+        for(Player player : players) {
+            addBaseDeadZone(m_deadZoneBuilder.buildForLocation(player.getLocation()));
+        }
+    }
+
+    @Override
+    public void addDeadZonesForPlayersNotInList(List<Player> players) {
+        Player[] onlinePlayers = Bukkit.getOnlinePlayers();
+        for(Player player : onlinePlayers) {
+            if(!players.contains(player)) {
+                addBaseDeadZone(m_deadZoneBuilder.buildForLocation(player.getLocation()));
+            }
+        }
     }
 }
