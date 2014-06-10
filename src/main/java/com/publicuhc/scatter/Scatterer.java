@@ -1,24 +1,34 @@
 package com.publicuhc.scatter;
 
+import com.publicuhc.scatter.exceptions.ScatterLocationException;
 import com.publicuhc.scatter.logic.ScatterLogic;
+import com.publicuhc.scatter.zones.DeadZone;
+import com.publicuhc.scatter.zones.DeadZoneBuilder;
+import org.bukkit.Location;
 
 import java.util.List;
 
 public interface Scatterer {
 
     /**
-     * @param logic the logic to add to the list we can use in scatters
+     * Attempt to find safe locations
+     *
+     * @return list of locations outside of provided deadzones and outside of zones created by the builder
+     * @throws ScatterLocationException if a location wasn't able to be fetched
      */
-    void addScatterLogic(ScatterLogic logic);
+    List<Location> getScatterLocations(int amount) throws ScatterLocationException;
 
-    /**
-     * @return all of the scatter logic we know
-     */
-    List<ScatterLogic> getAllScatterLogic();
+    void setLogic(ScatterLogic logic);
 
-    /**
-     * @param name the id of the logic to fetch
-     * @return the scatterlogic if found, null otherwise
-     */
-    ScatterLogic getScatterLogic(String name);
+    ScatterLogic getLogic();
+
+    void setDeadZoneBuilder(DeadZoneBuilder builder);
+
+    DeadZoneBuilder getDeadZoneBuilder();
+
+    List<DeadZone> getBaseDeadZones();
+
+    void setBaseDeadZones(List<DeadZone> zones);
+
+    void addBaseDeadZone(DeadZone zone);
 }
