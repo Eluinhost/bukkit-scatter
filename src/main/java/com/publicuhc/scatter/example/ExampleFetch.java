@@ -1,7 +1,7 @@
 package com.publicuhc.scatter.example;
 
-import com.publicuhc.scatter.LocationMapping;
-import com.publicuhc.scatter.PlayerScatterer;
+import com.publicuhc.scatter.DefaultScatterer;
+import com.publicuhc.scatter.Scatterer;
 import com.publicuhc.scatter.exceptions.ScatterLocationException;
 import com.publicuhc.scatter.logic.RandomCircleScatterLogic;
 import com.publicuhc.scatter.logic.ScatterLogic;
@@ -41,12 +41,13 @@ public class ExampleFetch {
 
         CircularDeadZoneBuilder deadZoneForTeleports = new CircularDeadZoneBuilder(30);
 
-        PlayerScatterer scatterer = new PlayerScatterer(logic, players, deadZones, deadZoneForTeleports);
+        Scatterer scatterer = new DefaultScatterer(logic, deadZones, deadZoneForTeleports);
 
         try {
-            List<LocationMapping> mappings = scatterer.getScatterLocations();
+            List<Location> locations = scatterer.getScatterLocations(players.size());
 
-            //mappings is UUID=>Location for all the provided players, just need to teleport them as needed
+            //shuffle locations + teleport players
+
         } catch (ScatterLocationException e) {
             //couldn't fetch all locations
         }
