@@ -12,7 +12,7 @@ import java.util.List;
 public interface Scatterer {
 
     /**
-     * Attempt to find safe locations
+     * Attempt to find safe locations. Returns the block that can be teleported onto, may require an offset
      *
      * @return list of locations outside of provided deadzones and outside of zones created by the builder
      * @throws ScatterLocationException if a location wasn't able to be fetched
