@@ -5,7 +5,7 @@ import org.bukkit.World;
 
 public class WorldDeadZoneBuilder implements DeadZoneBuilder {
 
-    private final World m_world;
+    private World m_world;
 
     /**
      * Creates deadzones for an entire world
@@ -13,6 +13,24 @@ public class WorldDeadZoneBuilder implements DeadZoneBuilder {
      */
     public WorldDeadZoneBuilder(World world) {
         m_world = world;
+    }
+
+    /**
+     * @return the world that will be a deadzone
+     */
+    public World getWorld()
+    {
+        return m_world;
+    }
+
+    /**
+     * @param world the world to make a dead zone
+     * @return this
+     */
+    public WorldDeadZoneBuilder setWorld(World world)
+    {
+        m_world = world;
+        return this;
     }
 
     /**

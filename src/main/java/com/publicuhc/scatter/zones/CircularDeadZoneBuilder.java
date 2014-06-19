@@ -15,6 +15,24 @@ public class CircularDeadZoneBuilder implements DeadZoneBuilder {
     }
 
     /**
+     * @return the radius of the circle
+     */
+    public double getRadius()
+    {
+        return m_radius;
+    }
+
+    /**
+     * @param radius the radius of the circle
+     * @return this
+     */
+    public CircularDeadZoneBuilder setRadius(double radius)
+    {
+        m_radius = radius;
+        return this;
+    }
+
+    /**
      * @param location the location of the centre of the circle
      * @return the dead zone
      */

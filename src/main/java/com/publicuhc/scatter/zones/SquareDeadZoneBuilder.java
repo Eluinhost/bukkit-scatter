@@ -15,6 +15,24 @@ public class SquareDeadZoneBuilder implements DeadZoneBuilder {
     }
 
     /**
+     * @return the length of 1 side of the square
+     */
+    public double getSideLength()
+    {
+        return m_sideLength;
+    }
+
+    /**
+     * @param sideLength the length of 1 side of the square
+     * @return this
+     */
+    public SquareDeadZoneBuilder setSideLength(double sideLength)
+    {
+        m_sideLength = sideLength;
+        return this;
+    }
+
+    /**
      * @param location the centre of the square
      * @return the built deadzone
      */
