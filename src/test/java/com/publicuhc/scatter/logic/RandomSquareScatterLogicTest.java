@@ -32,6 +32,7 @@ public class RandomSquareScatterLogicTest {
     public void onStartup() throws NoSolidBlockException {
         mockRandom = mock(Random.class);
         World world = mock(World.class);
+        when(world.getMaxHeight()).thenReturn(1);
         centre = new Location(world, 10, 0, -10);
         logic = spy(new RandomSquareScatterLogic(mockRandom));
         logic.setCentre(centre);
