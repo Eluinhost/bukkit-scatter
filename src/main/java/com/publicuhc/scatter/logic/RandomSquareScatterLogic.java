@@ -30,7 +30,7 @@ public class RandomSquareScatterLogic extends StandardScatterLogic {
 
             //make a new location at world height at the coordinates
             Location scatterLocation = m_centre.clone();
-            scatterLocation.setY(m_centre.getWorld().getMaxHeight());
+            scatterLocation.setY(m_centre.getWorld().getMaxHeight()-1);
 
             //add the offsets we generated
             scatterLocation.add(xcoord, 0, zcoord);

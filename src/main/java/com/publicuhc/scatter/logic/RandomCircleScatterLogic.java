@@ -38,7 +38,7 @@ public class RandomCircleScatterLogic extends StandardScatterLogic {
 
             //make a new location at world height at the coordinates
             Location scatterLocation = getCentre().clone();
-            scatterLocation.setY(getCentre().getWorld().getMaxHeight());
+            scatterLocation.setY(getCentre().getWorld().getMaxHeight()-1);
 
             //add the offsets we generated
             scatterLocation.add(xcoord.doubleValue(), 0, zcoord.doubleValue());
