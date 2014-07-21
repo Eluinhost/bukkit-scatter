@@ -7,74 +7,20 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class RandomCircleScatterLogic extends ScatterLogic {
+public class RandomCircleScatterLogic extends StandardScatterLogic {
 
     public static final double MATH_TAU = Math.PI * 2;
 
-    private int m_maxAttempts;
-    private double m_radius;
-    private Location m_centre;
-    private List<Material>  m_materials = new ArrayList<Material>();
-
     public RandomCircleScatterLogic(Random random, Location centre, int maxAttempts, double radius, Material... allowedMaterials) {
-        super(random);
-        m_maxAttempts = maxAttempts;
-        m_radius = radius;
-        m_centre = centre;
-        m_materials.addAll(Arrays.asList(allowedMaterials));
+        super(random, centre, maxAttempts, radius, allowedMaterials);
     }
 
     public RandomCircleScatterLogic(Random random) {
         super(random);
     }
-
-
-    public int getMaxAttempts() {
-        return m_maxAttempts;
-    }
-
-    public RandomCircleScatterLogic setMaxAttempts(int attempts) {
-        m_maxAttempts = attempts;
-        return this;
-    }
-
-    public double getRadius() {
-        return m_radius;
-    }
-
-    public RandomCircleScatterLogic setRadius(double radius) {
-        m_radius = radius;
-        return this;
-    }
-
-    public Location getCentre() {
-        return m_centre;
-    }
-
-    public RandomCircleScatterLogic setCentre(Location centre) {
-        m_centre = centre;
-        return this;
-    }
-
-    public List<Material> getMaterials() {
-        return m_materials;
-    }
-
-    public RandomCircleScatterLogic setMaterials(List<Material> materials) {
-        m_materials = materials;
-        return this;
-    }
-
-    public RandomCircleScatterLogic addMaterials(Material... materials) {
-        m_materials.addAll(Arrays.asList(materials));
-        return this;
-    }
-
 
     @Override
     public Location getScatterLocation(List<DeadZone> deadZones) throws ScatterLocationException {
