@@ -33,7 +33,10 @@ public class RandomCircleScatterLogicTest {
         mockRandom = mock(Random.class);
         World world = mock(World.class);
         centre = new Location(world, 10, 0, -10);
-        logic = spy(new RandomCircleScatterLogic(mockRandom, centre, 1, 10));
+        logic = spy(new RandomCircleScatterLogic(mockRandom));
+        logic.setCentre(centre);
+        logic.setMaxAttempts(1);
+        logic.setRadius(10);
         doNothing().when(logic).setToHighestNonAir(any(Location.class));
     }
 

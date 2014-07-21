@@ -17,6 +17,11 @@ public class PresetSpawnsScatterLogic extends ScatterLogic {
         m_spawns = spawns;
     }
 
+    public PresetSpawnsScatterLogic(Random random) {
+        super(random);
+        m_spawns = new ArrayList<Location>();
+    }
+
     public List<Location> getSpawnsList() {
         return m_spawns;
     }

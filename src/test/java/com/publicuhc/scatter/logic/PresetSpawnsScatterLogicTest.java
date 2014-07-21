@@ -44,7 +44,8 @@ public class PresetSpawnsScatterLogicTest {
         spawns.add(new Location(mockWorld, 10, 0, 10));
         spawns.add(new Location(mockWorld, 0, 0, 0));
 
-        logic = new PresetSpawnsScatterLogic(mockRandom, spawns);
+        logic = new PresetSpawnsScatterLogic(mockRandom);
+        logic.setSpawnsList(spawns);
     }
 
     @Test

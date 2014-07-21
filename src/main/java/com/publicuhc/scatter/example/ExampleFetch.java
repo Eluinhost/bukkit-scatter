@@ -4,7 +4,6 @@ import com.publicuhc.scatter.DefaultScatterer;
 import com.publicuhc.scatter.Scatterer;
 import com.publicuhc.scatter.exceptions.ScatterLocationException;
 import com.publicuhc.scatter.logic.RandomCircleScatterLogic;
-import com.publicuhc.scatter.logic.ScatterLogic;
 import com.publicuhc.scatter.zones.CircularDeadZoneBuilder;
 import com.publicuhc.scatter.zones.DeadZone;
 import com.publicuhc.scatter.zones.SquareDeadZoneBuilder;
@@ -22,13 +21,11 @@ public class ExampleFetch {
 
     public void exampleFetch() {
 
-        ScatterLogic logic = new RandomCircleScatterLogic(
-                new Random(),
-                new Location(Bukkit.getWorld("world"), 0, 0, 0),
-                100,
-                800,
-                Material.GRASS, Material.ACACIA_STAIRS, Material.SAND
-        );
+        RandomCircleScatterLogic logic = new RandomCircleScatterLogic(new Random());
+        logic.setCentre(new Location(Bukkit.getWorld("world"), 0, 0, 0));
+        logic.setMaxAttempts(100);
+        logic.setRadius(100);
+        logic.addMaterials(Material.GRASS, Material.ACACIA_STAIRS, Material.SAND);
 
         List<Player> players = Arrays.asList(Bukkit.getOnlinePlayers());
 

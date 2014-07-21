@@ -27,6 +27,10 @@ public class RandomSquareScatterLogic extends ScatterLogic {
         m_materials.addAll(Arrays.asList(allowedMaterials));
     }
 
+    public RandomSquareScatterLogic(Random random) {
+        super(random);
+    }
+
     public int getMaxAttempts() {
         return m_maxAttempts;
     }

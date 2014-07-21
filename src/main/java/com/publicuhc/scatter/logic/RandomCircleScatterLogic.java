@@ -29,6 +29,11 @@ public class RandomCircleScatterLogic extends ScatterLogic {
         m_materials.addAll(Arrays.asList(allowedMaterials));
     }
 
+    public RandomCircleScatterLogic(Random random) {
+        super(random);
+    }
+
+
     public int getMaxAttempts() {
         return m_maxAttempts;
     }
