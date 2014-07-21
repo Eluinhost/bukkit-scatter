@@ -52,13 +52,21 @@ public class CircularDeadZoneBuilder implements DeadZoneBuilder {
          * @param radius the radius of the circle
          */
         protected CircularDeadZone(Location centre, double radius) {
+            //check all on the same plane
+            centre.setY(0);
             m_centre = centre;
             m_radiusSquared = radius * radius;
         }
 
         @Override
         public boolean isLocationAllowed(Location location) {
-            return !location.getWorld().equals(m_centre.getWorld()) || location.distanceSquared(m_centre) > m_radiusSquared;
+            if(!location.getWorld().equals(m_centre.getWorld())) {
+                return true;
+            }
+
+            Location checkLocation = location.clone();
+            checkLocation.setY(0);
+            return checkLocation.distanceSquared(m_centre) > m_radiusSquared;
         }
     }
 }
