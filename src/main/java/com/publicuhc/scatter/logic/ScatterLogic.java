@@ -72,7 +72,7 @@ public abstract class ScatterLogic {
         }
 
         Block block = loc.getBlock();
-        while(block != null) {
+        while(block.getY() >= 0) {
             //set the Y if we find a non-air block
             if(block.getType() != Material.AIR) {
                 loc.setY(block.getY());
