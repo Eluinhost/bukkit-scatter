@@ -53,6 +53,7 @@ public class CircularDeadZoneBuilder implements DeadZoneBuilder {
          */
         protected CircularDeadZone(Location centre, double radius) {
             //check all on the same plane
+            centre = centre.clone();
             centre.setY(0);
             m_centre = centre;
             m_radiusSquared = radius * radius;
