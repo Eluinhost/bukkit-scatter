@@ -1,8 +1,8 @@
-package com.publicuhc.scatter.logic;
+package com.publicuhc.scatterlib.logic;
 
-import com.publicuhc.scatter.exceptions.NoSolidBlockException;
-import com.publicuhc.scatter.exceptions.ScatterLocationException;
-import com.publicuhc.scatter.zones.DeadZone;
+import com.publicuhc.scatterlib.exceptions.NoSolidBlockException;
+import com.publicuhc.scatterlib.exceptions.ScatterLocationException;
+import com.publicuhc.scatterlib.zones.DeadZone;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -63,7 +63,7 @@ public abstract class ScatterLogic {
      * Sets the Y coordinate to the highest non air block at a location, starting at it's Y and moving down
      *
      * @param loc The location to use
-     * @throws com.publicuhc.scatter.exceptions.NoSolidBlockException when there was no valid block found
+     * @throws com.publicuhc.scatterlib.exceptions.NoSolidBlockException when there was no valid block found
      */
     public void setToHighestNonAir(Location loc) throws NoSolidBlockException {
         //Load the chunk first so the world is generated
@@ -104,7 +104,7 @@ public abstract class ScatterLogic {
      * Get a list of valid scatter locations
      * @param deadZones the list of zones for which spawning should be disallowed
      * @return a valid location
-     * @throws com.publicuhc.scatter.exceptions.ScatterLocationException on being not able to get a valid location
+     * @throws com.publicuhc.scatterlib.exceptions.ScatterLocationException on being not able to get a valid location
      */
     public abstract Location getScatterLocation(List<DeadZone> deadZones) throws ScatterLocationException;
 

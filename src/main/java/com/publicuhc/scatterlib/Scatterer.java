@@ -1,9 +1,9 @@
-package com.publicuhc.scatter;
+package com.publicuhc.scatterlib;
 
-import com.publicuhc.scatter.exceptions.ScatterLocationException;
-import com.publicuhc.scatter.logic.ScatterLogic;
-import com.publicuhc.scatter.zones.DeadZone;
-import com.publicuhc.scatter.zones.DeadZoneBuilder;
+import com.publicuhc.scatterlib.exceptions.ScatterLocationException;
+import com.publicuhc.scatterlib.logic.ScatterLogic;
+import com.publicuhc.scatterlib.zones.DeadZone;
+import com.publicuhc.scatterlib.zones.DeadZoneBuilder;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 

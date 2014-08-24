@@ -1,8 +1,8 @@
-package com.publicuhc.scatter.logic;
+package com.publicuhc.scatterlib.logic;
 
-import com.publicuhc.scatter.exceptions.NoSolidBlockException;
-import com.publicuhc.scatter.exceptions.ScatterLocationException;
-import com.publicuhc.scatter.zones.DeadZone;
+import com.publicuhc.scatterlib.exceptions.NoSolidBlockException;
+import com.publicuhc.scatterlib.exceptions.ScatterLocationException;
+import com.publicuhc.scatterlib.zones.DeadZone;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
@@ -10,38 +10,30 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
 
-public class RandomCircleScatterLogic extends StandardScatterLogic {
+public class RandomSquareScatterLogic extends StandardScatterLogic {
 
-    public static final double MATH_TAU = Math.PI * 2;
-
-    public RandomCircleScatterLogic(Random random, Location centre, int maxAttempts, double radius, Material... allowedMaterials) {
+    public RandomSquareScatterLogic(Random random, Location centre, int maxAttempts, double radius, Material... allowedMaterials) {
         super(random, centre, maxAttempts, radius, allowedMaterials);
     }
 
-    public RandomCircleScatterLogic(Random random) {
+    public RandomSquareScatterLogic(Random random) {
         super(random);
     }
 
     @Override
     public Location getScatterLocation(List<DeadZone> deadZones) throws ScatterLocationException {
-        for (int i = 0; i < getMaxAttempts(); i++) {
+        for (int i = 0; i < m_maxAttempts; i++) {
 
-            //get a random angle between 0 and TAU
-            double randomAngle = getRandom().nextDouble() * MATH_TAU;
-
-            //get a random radius for uniform circular distribution
-            double radius = getRadius() * StrictMath.sqrt(getRandom().nextDouble());
-
-            //Convert back to cartesian coords and the nearest .1
-            BigDecimal xcoord = getXFromRadians(radius, randomAngle);
-            BigDecimal zcoord = getZFromRadians(radius, randomAngle);
+            //Get the random coords within the box
+            double xcoord = new BigDecimal((getRandom().nextDouble() * m_radius * 2.0D) - m_radius).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+            double zcoord = new BigDecimal((getRandom().nextDouble() * m_radius * 2.0D) - m_radius).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 
             //make a new location at world height at the coordinates
-            Location scatterLocation = getCentre().clone();
-            scatterLocation.setY(getCentre().getWorld().getMaxHeight()-1);
+            Location scatterLocation = m_centre.clone();
+            scatterLocation.setY(m_centre.getWorld().getMaxHeight()-1);
 
             //add the offsets we generated
-            scatterLocation.add(xcoord.doubleValue(), 0, zcoord.doubleValue());
+            scatterLocation.add(xcoord, 0, zcoord);
 
             //set the the nearest centre of a block
             setToNearestCentre(scatterLocation);
@@ -54,10 +46,10 @@ public class RandomCircleScatterLogic extends StandardScatterLogic {
             }
 
             //if there are any mats set check that the block we have is a valid one
-            if(getMaterials().size() > 0) {
+            if(m_materials.size() > 0) {
                 Material mat = scatterLocation.getBlock().getType();
 
-                if(!getMaterials().contains(mat)) {
+                if(!m_materials.contains(mat)) {
                     continue;
                 }
             }
@@ -77,11 +69,11 @@ public class RandomCircleScatterLogic extends StandardScatterLogic {
 
     @Override
     public String getID() {
-        return "Random Circle";
+        return "Random Square";
     }
 
     @Override
     public String getDescription() {
-        return "Scatter randomly within a circle";
+        return "Scatter randomly within a square";
     }
 }

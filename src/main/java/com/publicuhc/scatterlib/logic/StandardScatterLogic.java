@@ -1,4 +1,4 @@
-package com.publicuhc.scatter.logic;
+package com.publicuhc.scatterlib.logic;
 
 import org.bukkit.Location;
 import org.bukkit.Material;

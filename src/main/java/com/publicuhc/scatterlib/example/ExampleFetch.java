@@ -1,12 +1,12 @@
-package com.publicuhc.scatter.example;
+package com.publicuhc.scatterlib.example;
 
-import com.publicuhc.scatter.DefaultScatterer;
-import com.publicuhc.scatter.Scatterer;
-import com.publicuhc.scatter.exceptions.ScatterLocationException;
-import com.publicuhc.scatter.logic.RandomCircleScatterLogic;
-import com.publicuhc.scatter.zones.CircularDeadZoneBuilder;
-import com.publicuhc.scatter.zones.DeadZone;
-import com.publicuhc.scatter.zones.SquareDeadZoneBuilder;
+import com.publicuhc.scatterlib.DefaultScatterer;
+import com.publicuhc.scatterlib.Scatterer;
+import com.publicuhc.scatterlib.exceptions.ScatterLocationException;
+import com.publicuhc.scatterlib.logic.RandomCircleScatterLogic;
+import com.publicuhc.scatterlib.zones.CircularDeadZoneBuilder;
+import com.publicuhc.scatterlib.zones.DeadZone;
+import com.publicuhc.scatterlib.zones.SquareDeadZoneBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;

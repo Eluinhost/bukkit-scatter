@@ -1,7 +1,7 @@
-package com.publicuhc.scatter.logic;
+package com.publicuhc.scatterlib.logic;
 
-import com.publicuhc.scatter.exceptions.ScatterLocationException;
-import com.publicuhc.scatter.zones.DeadZone;
+import com.publicuhc.scatterlib.exceptions.ScatterLocationException;
+import com.publicuhc.scatterlib.zones.DeadZone;
 import org.bukkit.Location;
 
 import java.util.ArrayList;

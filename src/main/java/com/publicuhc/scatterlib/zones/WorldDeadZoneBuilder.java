@@ -1,4 +1,4 @@
-package com.publicuhc.scatter.zones;
+package com.publicuhc.scatterlib.zones;
 
 import org.bukkit.Location;
 import org.bukkit.World;
