@@ -1,19 +1,17 @@
 package com.publicuhc.scatterlib.logic;
 
+import com.google.common.collect.Sets;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public abstract class StandardScatterLogic extends ScatterLogic {
 
     protected int m_maxAttempts;
     protected double m_radius;
     protected Location m_centre;
-    protected List<Material> m_materials = new ArrayList<Material>();
+    protected Set<Material> m_materials = Sets.newHashSet();
 
     public StandardScatterLogic(Random random, Location centre, int maxAttempts, double radius, Material... allowedMaterials)
     {
@@ -61,11 +59,11 @@ public abstract class StandardScatterLogic extends ScatterLogic {
         return this;
     }
 
-    public List<Material> getMaterials() {
+    public Set<Material> getMaterials() {
         return m_materials;
     }
 
-    public StandardScatterLogic setMaterials(List<Material> materials)
+    public StandardScatterLogic setMaterials(Set<Material> materials)
     {
         m_materials = materials;
         return this;
