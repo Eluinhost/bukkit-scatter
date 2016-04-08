@@ -1,9 +1,9 @@
-package com.publicuhc.scatterlib;
+package gg.uhc.scatterlib;
 
-import com.publicuhc.scatterlib.exceptions.ScatterLocationException;
-import com.publicuhc.scatterlib.logic.ScatterLogic;
-import com.publicuhc.scatterlib.zones.DeadZone;
-import com.publicuhc.scatterlib.zones.DeadZoneBuilder;
+import gg.uhc.scatterlib.exceptions.ScatterLocationException;
+import gg.uhc.scatterlib.logic.ScatterLogic;
+import gg.uhc.scatterlib.zones.DeadZone;
+import gg.uhc.scatterlib.zones.DeadZoneBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -117,8 +117,7 @@ public class DefaultScatterer implements Scatterer{
 
     @Override
     public void addDeadZonesForPlayersNotInList(List<Player> players) {
-        Player[] onlinePlayers = Bukkit.getOnlinePlayers();
-        for(Player player : onlinePlayers) {
+        for(Player player : Bukkit.getOnlinePlayers()) {
             if(!players.contains(player)) {
                 addBaseDeadZone(m_deadZoneBuilder.buildForLocation(player.getLocation()));
             }

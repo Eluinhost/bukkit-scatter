@@ -1,21 +1,18 @@
-package com.publicuhc.scatterlib.example;
+package gg.uhc.scatterlib.example;
 
-import com.publicuhc.scatterlib.DefaultScatterer;
-import com.publicuhc.scatterlib.Scatterer;
-import com.publicuhc.scatterlib.exceptions.ScatterLocationException;
-import com.publicuhc.scatterlib.logic.RandomCircleScatterLogic;
-import com.publicuhc.scatterlib.zones.CircularDeadZoneBuilder;
-import com.publicuhc.scatterlib.zones.DeadZone;
-import com.publicuhc.scatterlib.zones.SquareDeadZoneBuilder;
+import gg.uhc.scatterlib.DefaultScatterer;
+import gg.uhc.scatterlib.Scatterer;
+import gg.uhc.scatterlib.exceptions.ScatterLocationException;
+import gg.uhc.scatterlib.logic.RandomCircleScatterLogic;
+import gg.uhc.scatterlib.zones.CircularDeadZoneBuilder;
+import gg.uhc.scatterlib.zones.DeadZone;
+import gg.uhc.scatterlib.zones.SquareDeadZoneBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class ExampleFetch {
 
@@ -27,7 +24,7 @@ public class ExampleFetch {
         logic.setRadius(100);
         logic.addMaterials(Material.GRASS, Material.ACACIA_STAIRS, Material.SAND);
 
-        List<Player> players = Arrays.asList(Bukkit.getOnlinePlayers());
+        Collection<? extends Player> players = Bukkit.getOnlinePlayers();
 
         List<DeadZone> deadZones = new ArrayList<DeadZone>();
 

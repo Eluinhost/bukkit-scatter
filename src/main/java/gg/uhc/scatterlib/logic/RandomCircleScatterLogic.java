@@ -1,8 +1,8 @@
-package com.publicuhc.scatterlib.logic;
+package gg.uhc.scatterlib.logic;
 
-import com.publicuhc.scatterlib.exceptions.NoSolidBlockException;
-import com.publicuhc.scatterlib.exceptions.ScatterLocationException;
-import com.publicuhc.scatterlib.zones.DeadZone;
+import gg.uhc.scatterlib.exceptions.NoSolidBlockException;
+import gg.uhc.scatterlib.exceptions.ScatterLocationException;
+import gg.uhc.scatterlib.zones.DeadZone;
 import org.bukkit.Location;
 import org.bukkit.Material;
 

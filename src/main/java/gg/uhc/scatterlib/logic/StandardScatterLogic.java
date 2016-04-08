@@ -1,4 +1,4 @@
-package com.publicuhc.scatterlib.logic;
+package gg.uhc.scatterlib.logic;
 
 import com.google.common.collect.Sets;
 import org.bukkit.Location;

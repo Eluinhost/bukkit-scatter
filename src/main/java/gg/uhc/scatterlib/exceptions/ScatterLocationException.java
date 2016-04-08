@@ -1,3 +1,3 @@
-package com.publicuhc.scatterlib.exceptions;
+package gg.uhc.scatterlib.exceptions;
 
 public class ScatterLocationException extends Exception {}
